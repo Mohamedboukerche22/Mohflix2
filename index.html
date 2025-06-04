@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohflix - الأفلام والمسلسلات</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #141414;
+            color: white;
+        }
+        
+        header {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .logo {
+            color: #E50914;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        
+        .hero {
+            height: 80vh;
+            background: url('https://via.placeholder.com/1920x1080') center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background-color: #E50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .btn-secondary {
+            background-color: rgba(109, 109, 110, 0.7);
+        }
+        
+        section {
+            padding: 50px;
+            margin-top: -100px;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .movies-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 20px 0;
+        }
+        
+        .movie {
+            min-width: 220px;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .movie:hover {
+            transform: scale(1.05);
+        }
+        
+        .movie img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        
+        .movie-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            padding: 20px 10px 10px;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .movie-info h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .movie-info p {
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+        
+        .rating {
+            color: #E50914;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #000;
+            padding: 30px 50px;
+            text-align: center;
+            color: #777;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        /* Scrollbar styling */
+        .movies-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .movies-container::-webkit-scrollbar-track {
+            background: #222;
+        }
+        
+        .movies-container::-webkit-scrollbar-thumb {
+            background: #E50914;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MOFLIX</div>
+        <nav>
+            <ul>
+                <li><a href="#">الصفحة الرئيسية</a></li>
+                <li><a href="#">الأفلام</a></li>
+                <li><a href="#">المسلسلات</a></li>
+                <li><a href="#">قائمتي</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>فيلم الشهر</h1>
+            <p>استمتع بأفضل الأفلام والمسلسلات الحصرية على Mohflix. انضم إلينا الآن واحصل على تجربة مشاهدة لا تُنسى.</p>
+            <button class="btn">تشغيل</button>
+            <button class="btn btn-secondary">المزيد من المعلومات</button>
+        </div>
+    </section>
+    
+    <section>
+        <h2>الأفلام الأكثر مشاهدة</h2>
+        <div class="movies-container">
+            <!-- Movie 1 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Movie+1" alt="فيلم 1">
+                <div class="movie-info">
+                    <h3>الفيلم الأول</h3>
+                    <p>أكشن، مغامرة</p>
+                    <p class="rating">★ 4.5/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 2 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Movie+2" alt="فيلم 2">
+                <div class="movie-info">
+                    <h3>الفيلم الثاني</h3>
+                    <p>دراما، رومانسي</p>
+                    <p class="rating">★ 4.2/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 3 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Movie+3" alt="فيلم 3">
+                <div class="movie-info">
+                    <h3>الفيلم الثالث</h3>
+                    <p>خيال علمي</p>
+                    <p class="rating">★ 4.7/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 4 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Movie+4" alt="فيلم 4">
+                <div class="movie-info">
+                    <h3>الفيلم الرابع</h3>
+                    <p>كوميدي</p>
+                    <p class="rating">★ 3.9/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 5 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Movie+5" alt="فيلم 5">
+                <div class="movie-info">
+                    <h3>الفيلم الخامس</h3>
+                    <p>رعب، غموض</p>
+                    <p class="rating">★ 4.1/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 6 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Movie+6" alt="فيلم 6">
+                <div class="movie-info">
+                    <h3>الفيلم السادس</h3>
+                    <p>تاريخي</p>
+                    <p class="rating">★ 4.3/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 7 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Movie+7" alt="فيلم 7">
+                <div class="movie-info">
+                    <h3>الفيلم السابع</h3>
+                    <p>جريمة، إثارة</p>
+                    <p class="rating">★ 4.6/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 8 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Movie+8" alt="فيلم 8">
+                <div class="movie-info">
+                    <h3>الفيلم الثامن</h3>
+                    <p>فانتازيا</p>
+                    <p class="rating">★ 4.0/5</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <h2>الأفلام الجديدة</h2>
+        <div class="movies-container">
+            <!-- Movie 9 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=New+Movie+1" alt="فيلم جديد 1">
+                <div class="movie-info">
+                    <h3>الفيلم الجديد الأول</h3>
+                    <p>أكشن، إثارة</p>
+                    <p class="rating">★ 4.4/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 10 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=New+Movie+2" alt="فيلم جديد 2">
+                <div class="movie-info">
+                    <h3>الفيلم الجديد الثاني</h3>
+                    <p>دراما</p>
+                    <p class="rating">★ 4.8/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 11 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=New+Movie+3" alt="فيلم جديد 3">
+                <div class="movie-info">
+                    <h3>الفيلم الجديد الثالث</h3>
+                    <p>كوميدي، رومانسي</p>
+                    <p class="rating">★ 3.8/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 12 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=New+Movie+4" alt="فيلم جديد 4">
+                <div class="movie-info">
+                    <h3>الفيلم الجديد الرابع</h3>
+                    <p>خيال علمي</p>
+                    <p class="rating">★ 4.5/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 13 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=New+Movie+5" alt="فيلم جديد 5">
+                <div class="movie-info">
+                    <h3>الفيلم الجديد الخامس</h3>
+                    <p>رعب</p>
+                    <p class="rating">★ 4.2/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 14 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=New+Movie+6" alt="فيلم جديد 6">
+                <div class="movie-info">
+                    <h3>الفيلم الجديد السادس</h3>
+                    <p>مغامرة</p>
+                    <p class="rating">★ 4.1/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 15 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=New+Movie+7" alt="فيلم جديد 7">
+                <div class="movie-info">
+                    <h3>الفيلم الجديد السابع</h3>
+                    <p>جريمة</p>
+                    <p class="rating">★ 4.3/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 16 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=New+Movie+8" alt="فيلم جديد 8">
+                <div class="movie-info">
+                    <h3>الفيلم الجديد الثامن</h3>
+                    <p>تاريخي، دراما</p>
+                    <p class="rating">★ 4.6/5</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <h2>الأفلام العربية</h2>
+        <div class="movies-container">
+            <!-- Movie 17 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Arabic+Movie+1" alt="فيلم عربي 1">
+                <div class="movie-info">
+                    <h3>الفيلم العربي الأول</h3>
+                    <p>دراما</p>
+                    <p class="rating">★ 4.0/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 18 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Arabic+Movie+2" alt="فيلم عربي 2">
+                <div class="movie-info">
+                    <h3>الفيلم العربي الثاني</h3>
+                    <p>كوميدي</p>
+                    <p class="rating">★ 4.2/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 19 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Arabic+Movie+3" alt="فيلم عربي 3">
+                <div class="movie-info">
+                    <h3>الفيلم العربي الثالث</h3>
+                    <p>رومانسي</p>
+                    <p class="rating">★ 3.9/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 20 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Arabic+Movie+4" alt="فيلم عربي 4">
+                <div class="movie-info">
+                    <h3>الفيلم العربي الرابع</h3>
+                    <p>أكشن</p>
+                    <p class="rating">★ 4.1/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 21 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Arabic+Movie+5" alt="فيلم عربي 5">
+                <div class="movie-info">
+                    <h3>الفيلم العربي الخامس</h3>
+                    <p>تاريخي</p>
+                    <p class="rating">★ 4.5/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 22 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Arabic+Movie+6" alt="فيلم عربي 6">
+                <div class="movie-info">
+                    <h3>الفيلم العربي السادس</h3>
+                    <p>إثارة</p>
+                    <p class="rating">★ 4.3/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 23 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Arabic+Movie+7" alt="فيلم عربي 7">
+                <div class="movie-info">
+                    <h3>الفيلم العربي السابع</h3>
+                    <p>رعب</p>
+                    <p class="rating">★ 3.7/5</p>
+                </div>
+            </div>
+            
+            <!-- Movie 24 -->
+            <div class="movie">
+                <img src="https://via.placeholder.com/220x330?text=Arabic+Movie+8" alt="فيلم عربي 8">
+                <div class="movie-info">
+                    <h3>الفيلم العربي الثامن</h3>
+                    <p>دراما، رومانسي</p>
+                    <p class="rating">★ 4.0/5</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2023 Mohflix. جميع الحقوق محفوظة.</p>
+        <p>تابعنا على وسائل التواصل الاجتماعي</p>
+        <p>للأسئلة والاستفسارات: info@mohflix.com</p>
+    </footer>
+</body>
+</html>
