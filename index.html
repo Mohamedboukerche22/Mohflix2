@@ -23,14 +23,18 @@
 
   <script type="text/babel">
     const movies = [
-      { id: 1, title: "الأسد الملك", img: "https://image.tmdb.org/t/p/w500/8TbgWv4g2XZZKkC2rXJJy9wAcna.jpg", genre: "رسوم متحركة", rating: "8.5" },
-      { id: 2, title: "البحث عن نيمو", img: "https://image.tmdb.org/t/p/w500/czVhhAaSBFpakur7U3pOwutvIPI.jpg", genre: "مغامرة", rating: "7.8" },
-      { id: 3, title: "الجوكر", img: "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg", genre: "دراما", rating: "8.4" },
-      { id: 4, title: "بين النجوم", img: "https://image.tmdb.org/t/p/w500/rAIc6I2iTAmdXQy9WauSxKWTaD5.jpg", genre: "خيال علمي", rating: "8.6" },
-      { id: 5, title: "المنتقمون: نهاية اللعبة", img: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg", genre: "أكشن", rating: "8.3" },
+      { id: 1, title: "الأسد الملك", img: "https://image.tmdb.org/t/p/w500/8TbgWv4g2XZZKkC2rXJJy9wAcna.jpg", genre: "رسوم متحركة", rating: "8.5", videoUrl: "https://archive.org/download/Disney_The_Lion_King_1994/Disney%20The%20Lion%20King%20%281994%29.mp4" },
+      { id: 2, title: "البحث عن نيمو", img: "https://image.tmdb.org/t/p/w500/czVhhAaSBFpakur7U3pOwutvIPI.jpg", genre: "مغامرة", rating: "7.8", videoUrl: "https://archive.org/download/Finding.Nemo.2003/Finding.Nemo.2003.mp4" },
+      { id: 3, title: "الجوكر", img: "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg", genre: "دراما", rating: "8.4", videoUrl: "https://archive.org/download/joker-2019_202208/Joker%20%282019%29.mp4" },
+      { id: 4, title: "بين النجوم", img: "https://image.tmdb.org/t/p/w500/rAIc6I2iTAmdXQy9WauSxKWTaD5.jpg", genre: "خيال علمي", rating: "8.6", videoUrl: "https://archive.org/download/interstellar-2014/Interstellar%20%282014%29.mp4" },
+      { id: 5, title: "المنتقمون: نهاية اللعبة", img: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg", genre: "أكشن", rating: "8.3", videoUrl: "https://archive.org/download/avengers-endgame-2019/Avengers.Endgame.2019.mp4" },
     ];
 
     const MovieCard = ({ movie }) => {
+      const handleWatchNow = () => {
+        window.location.href = movie.videoUrl;
+      };
+
       return (
         <div className="movie-card bg-gray-900 rounded-lg overflow-hidden m-4 w-64">
           <img src={movie.img} alt={movie.title} className="w-full h-96 object-cover" />
@@ -38,6 +42,12 @@
             <h3 className="text-xl font-bold">{movie.title}</h3>
             <p className="text-gray-400">النوع: {movie.genre}</p>
             <p className="text-yellow-400">التقييم: {movie.rating}/10</p>
+            <button 
+              onClick={handleWatchNow} 
+              className="mt-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              شاهد الآن
+            </button>
           </div>
         </div>
       );
@@ -63,7 +73,7 @@
             </div>
           </main>
           <footer className="bg-gray-900 p-4 text-center">
-            <p>&copy; 2025 Mohflix. جميع الحقوق محفوظة.</p>
+            <p>© 2025 Mohflix. جميع الحقوق محفوظة.</p>
           </footer>
         </div>
       );
